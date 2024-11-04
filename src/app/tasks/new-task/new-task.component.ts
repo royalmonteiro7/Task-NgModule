@@ -4,7 +4,7 @@ import { TasksService } from '../tasks.service';
 @Component({
   selector: 'app-new-task',
   templateUrl: './new-task.component.html',
-  styleUrl: './new-task.component.css'
+  styleUrl: './new-task.component.css',
 })
 export class NewTaskComponent {
   @Input({ required: true }) userId!: string;
@@ -12,18 +12,21 @@ export class NewTaskComponent {
   enteredTitle = '';
   enteredSummary = '';
   enteredDate = '';
-  private tasksService = inject(TasksService)
+  private tasksService = inject(TasksService);
 
   onCancel() {
     this.close.emit();
   }
 
   onSubmit() {
-    this.tasksService.addTask({
-      title: this.enteredTitle,
-      summary: this.enteredSummary,
-      date: this.enteredDate,
-    }, this.userId)
+    this.tasksService.addTask(
+      {
+        title: this.enteredTitle,
+        summary: this.enteredSummary,
+        date: this.enteredDate,
+      },
+      this.userId
+    );
 
     this.close.emit();
   }
